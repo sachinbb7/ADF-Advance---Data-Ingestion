@@ -1,8 +1,4 @@
-Absolutely. Based on the information you provided and the pipeline design shown in the screenshot, I’d make the README look more like a **real production Azure Data Engineering project** rather than a basic project description.
 
-You can use the following directly as your `README.md`:
-
-````markdown
 # 🚀 Azure SQL to ADLS Data Migration Pipeline
 
 ## 📌 Overview
