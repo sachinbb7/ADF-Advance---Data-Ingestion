@@ -11,5 +11,5 @@ jobs:
         uses: Azure/sql-action@v2
         with:
           connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
-          path: './schema.sql' # Path to your SQL script file inside your repo
+          path: 'script.sql' # Path to your SQL script file inside your repo
           action: 'Execute'
