@@ -1,0 +1,15 @@
+name: Azure SQL Deploy
+on:
+  push:
+    branches: [ main ] # Change to your default branch name if different
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Azure SQL Deploy
+        uses: Azure/sql-action@v2
+        with:
+          connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
+          path: './schema.sql' # Path to your SQL script file inside your repo
+          action: 'Execute'
