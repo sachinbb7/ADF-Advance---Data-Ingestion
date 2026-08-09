@@ -1,0 +1,15 @@
+{
+	"name": "adf-advance-testing",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "acc1bd20-0640-4151-8789-05874f1712c7",
+		"tenantId": "bc4809ab-ed2a-40ea-827d-530ce195136e"
+	}
+}
