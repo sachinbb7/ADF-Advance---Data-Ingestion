@@ -706,25 +706,61 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/th_pl_schedule')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
+			"name": "[concat(parameters('factoryName'), '/pl_schedule_ingestion')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Hour",
-						"interval": 2,
-						"startTime": "2026-08-12T09:26:00",
-						"endTime": "2026-08-12T09:26:00",
-						"timeZone": "India Standard Time"
+				"activities": [
+					{
+						"name": "Schedule_ingestion",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"policy": {
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "pl_ingestion",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {
+								"schema": {
+									"value": "@pipeline().parameters.exec_schema",
+									"type": "Expression"
+								},
+								"table": {
+									"value": "@pipeline().parameters.exec_table",
+									"type": "Expression"
+								},
+								"backdate": {
+									"value": "@pipeline().parameters.exec_backdate",
+									"type": "Expression"
+								}
+							}
+						}
 					}
-				}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"exec_schema": {
+						"type": "string"
+					},
+					"exec_table": {
+						"type": "string"
+					},
+					"exec_backdate": {
+						"type": "string"
+					}
+				},
+				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pl_ingestion')]"
+			]
 		}
 	]
 }
