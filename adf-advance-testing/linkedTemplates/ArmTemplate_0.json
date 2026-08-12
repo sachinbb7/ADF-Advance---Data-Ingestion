@@ -92,6 +92,27 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/th_pl_schedule')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Hour",
+						"interval": 2,
+						"startTime": "2026-08-12T09:26:00",
+						"endTime": "2026-08-12T09:26:00",
+						"timeZone": "India Standard Time"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/ds_adls_parquet')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -615,7 +636,10 @@
 												"type": "DateTime"
 											},
 											"ErrorMessage": {
-												"value": null,
+												"value": {
+													"value": "@if(empty(activity('Copy data from sql to adls')?.error?.message),'Copy Data Succeeded',activity('Copy data from sql to adls')?.error?.message)",
+													"type": "Expression"
+												},
 												"type": "String"
 											},
 											"PipelineName": {
@@ -700,94 +724,6 @@
 				"[concat(variables('factoryId'), '/linkedServices/ls_AzureSql')]",
 				"[concat(variables('factoryId'), '/datasets/ds_AzureSql')]",
 				"[concat(variables('factoryId'), '/datasets/ds_adls_parquet')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Schedule')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Execute Ingestion Pipeline",
-						"type": "ExecutePipeline",
-						"dependsOn": [],
-						"policy": {
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "pl_ingestion",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {
-								"schema": {
-									"value": "@pipeline().parameters.schema",
-									"type": "Expression"
-								},
-								"table": {
-									"value": "@pipeline().parameters.table",
-									"type": "Expression"
-								}
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"parameters": {
-					"schema": {
-						"type": "string",
-						"defaultValue": "dbo"
-					},
-					"table": {
-						"type": "string",
-						"defaultValue": "Orders_testing"
-					},
-					"back_date": {
-						"type": "string",
-						"defaultValue": "\"\""
-					}
-				},
-				"annotations": [],
-				"lastPublishTime": "2026-08-09T13:49:40Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pl_ingestion')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/th_pl_schedule')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Schedule",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Hour",
-						"interval": 2,
-						"startTime": "2026-08-12T09:26:00",
-						"endTime": "2026-08-12T09:26:00",
-						"timeZone": "India Standard Time"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Schedule')]"
 			]
 		}
 	]

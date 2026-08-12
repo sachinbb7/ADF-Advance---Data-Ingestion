@@ -45,63 +45,6 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/Schedule')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Execute Ingestion Pipeline",
-						"type": "ExecutePipeline",
-						"dependsOn": [],
-						"policy": {
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"pipeline": {
-								"referenceName": "pl_ingestion",
-								"type": "PipelineReference"
-							},
-							"waitOnCompletion": true,
-							"parameters": {
-								"schema": {
-									"value": "@pipeline().parameters.schema",
-									"type": "Expression"
-								},
-								"table": {
-									"value": "@pipeline().parameters.table",
-									"type": "Expression"
-								}
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"parameters": {
-					"schema": {
-						"type": "string",
-						"defaultValue": "dbo"
-					},
-					"table": {
-						"type": "string",
-						"defaultValue": "Orders_testing"
-					},
-					"back_date": {
-						"type": "string",
-						"defaultValue": "\"\""
-					}
-				},
-				"annotations": [],
-				"lastPublishTime": "2026-08-09T13:49:40Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pl_ingestion')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/pl_ingestion')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -481,7 +424,10 @@
 												"type": "DateTime"
 											},
 											"ErrorMessage": {
-												"value": null,
+												"value": {
+													"value": "@if(empty(activity('Copy data from sql to adls')?.error?.message),'Copy Data Succeeded',activity('Copy data from sql to adls')?.error?.message)",
+													"type": "Expression"
+												},
 												"type": "String"
 											},
 											"PipelineName": {
@@ -766,15 +712,7 @@
 			"properties": {
 				"annotations": [],
 				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "Schedule",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
+				"pipelines": [],
 				"type": "ScheduleTrigger",
 				"typeProperties": {
 					"recurrence": {
@@ -786,9 +724,7 @@
 					}
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/Schedule')]"
-			]
+			"dependsOn": []
 		}
 	]
 }
