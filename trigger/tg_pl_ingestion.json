@@ -8,6 +8,10 @@
 				"pipelineReference": {
 					"referenceName": "pl_schedule_ingestion",
 					"type": "PipelineReference"
+				},
+				"parameters": {
+					"exec_schema": "dbo",
+					"exec_table": "Orders_testing"
 				}
 			}
 		],
