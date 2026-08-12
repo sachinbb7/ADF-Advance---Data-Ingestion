@@ -1,0 +1,49 @@
+{
+	"name": "pl_schedule_ingestion",
+	"properties": {
+		"activities": [
+			{
+				"name": "Schedule_ingestion",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "pl_ingestion",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"schema": {
+							"value": "@pipeline().parameters.exec_schema",
+							"type": "Expression"
+						},
+						"table": {
+							"value": "@pipeline().parameters.exec_table",
+							"type": "Expression"
+						},
+						"backdate": {
+							"value": "@pipeline().parameters.exec_backdate",
+							"type": "Expression"
+						}
+					}
+				}
+			}
+		],
+		"parameters": {
+			"exec_schema": {
+				"type": "string"
+			},
+			"exec_table": {
+				"type": "string"
+			},
+			"exec_backdate": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}
