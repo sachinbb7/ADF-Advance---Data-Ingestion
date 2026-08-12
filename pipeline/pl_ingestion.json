@@ -371,7 +371,10 @@
 										"type": "DateTime"
 									},
 									"ErrorMessage": {
-										"value": null,
+										"value": {
+											"value": "@if(empty(activity('Copy data from sql to adls')?.error?.message),'Copy Data Succeeded',activity('Copy data from sql to adls')?.error?.message)",
+											"type": "Expression"
+										},
 										"type": "String"
 									},
 									"PipelineName": {
