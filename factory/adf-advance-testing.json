@@ -5,6 +5,10 @@
 			"gp_schema": {
 				"type": "string",
 				"value": "dbo"
+			},
+			"gp_table": {
+				"type": "string",
+				"value": "Orders_testing"
 			}
 		},
 		"trustModeClaimForMi": {
