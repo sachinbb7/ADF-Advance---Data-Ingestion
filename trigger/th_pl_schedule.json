@@ -1,0 +1,25 @@
+{
+	"name": "th_pl_schedule",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Schedule",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 2,
+				"startTime": "2026-08-12T09:26:00",
+				"endTime": "2026-08-12T09:26:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}

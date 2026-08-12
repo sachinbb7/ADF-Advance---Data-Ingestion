@@ -426,12 +426,10 @@
 		],
 		"parameters": {
 			"schema": {
-				"type": "string",
-				"defaultValue": "dbo"
+				"type": "string"
 			},
 			"table": {
-				"type": "string",
-				"defaultValue": "Orders_testing"
+				"type": "string"
 			},
 			"backdate": {
 				"type": "string"
