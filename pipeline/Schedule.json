@@ -39,7 +39,8 @@
 				"defaultValue": "Orders_testing"
 			},
 			"back_date": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "\"\""
 			}
 		},
 		"annotations": [],
