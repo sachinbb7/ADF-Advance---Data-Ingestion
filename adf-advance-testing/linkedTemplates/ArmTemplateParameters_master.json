@@ -1,0 +1,39 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adf-advance-testing"
+		},
+		"ls_adls_accountKey": {
+			"value": ""
+		},
+		"ls_cdc_accountKey": {
+			"value": ""
+		},
+		"ls_AzureSql_properties_typeProperties_server": {
+			"value": "adf-advance-server.database.windows.net"
+		},
+		"ls_AzureSql_properties_typeProperties_database": {
+			"value": "adf-advance"
+		},
+		"ls_AzureSql_properties_typeProperties_userName": {
+			"value": "sbb"
+		},
+		"ls_adls_properties_typeProperties_url": {
+			"value": "https://saadlsazurelearning.dfs.core.windows.net/"
+		},
+		"ls_akv_properties_typeProperties_baseUrl": {
+			"value": "https://AkvAzureSql.vault.azure.net/"
+		},
+		"ls_cdc_properties_typeProperties_url": {
+			"value": "https://saadlsazurelearningtest.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
