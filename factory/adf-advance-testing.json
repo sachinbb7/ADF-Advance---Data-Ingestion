@@ -1,6 +1,12 @@
 {
 	"name": "adf-advance-testing",
 	"properties": {
+		"globalParameters": {
+			"schema": {
+				"type": "string",
+				"value": "dbo"
+			}
+		},
 		"trustModeClaimForMi": {
 			"value": "Disabled",
 			"editable": true
