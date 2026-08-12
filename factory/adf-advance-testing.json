@@ -2,7 +2,7 @@
 	"name": "adf-advance-testing",
 	"properties": {
 		"globalParameters": {
-			"schema": {
+			"gp_schema": {
 				"type": "string",
 				"value": "dbo"
 			}
