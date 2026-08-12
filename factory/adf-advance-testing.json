@@ -9,6 +9,10 @@
 			"gp_table": {
 				"type": "string",
 				"value": "Orders_testing"
+			},
+			"gp_backdate": {
+				"type": "string",
+				"value": "1990-01-01"
 			}
 		},
 		"trustModeClaimForMi": {
